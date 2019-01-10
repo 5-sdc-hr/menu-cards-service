@@ -5,10 +5,9 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/5-sdc-hr/photo-carousel-server
+  - https://github.com/5-sdc-hr/reservation-calendar-service
+  - https://github.com/5-sdc-hr/reviews-service
 
 ## Table of Contents
 
@@ -24,7 +23,7 @@
 > Run `npm run react-dev` to launch webpack.
 > In another terminal window, run `npm startdev` to launch the server with nodemon.
 
-> Navigate to `http://localhost:3001/restaurants/70/` to preview component.
+> Navigate to `http://localhost:3003/restaurants/70/` to preview component.
 
 ## Requirements
 
@@ -33,7 +32,26 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - Node 6.13.0
 - etc
 
-## Development
+## CRUD Operations
+# Create
+> HTTP method: Post
+> Relative URI: `api/restaurants/:id/menu`
+> Save new menu to save to db
+
+# Read
+> HTTP method: Get
+> Relative URI: `api/restaurants/:id/menu`
+> Retrieve menu from db
+
+# Update
+> HTTP method: Put
+> Relative URI: `api/restaurants/:id/menu`
+> Edit menu in db
+
+# Delete
+> HTTP method: Delete
+> Relative URI: `api/restaurants/:id/menu`
+> Remove menu from db
 
 ### Installing Dependencies
 
