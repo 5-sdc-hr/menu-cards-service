@@ -33,25 +33,25 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 - etc
 
 ## CRUD Operations
-# Create
-> HTTP method: Post
-> Relative URI: `api/restaurants/:id/menu`
-> Save new menu to save to db
+### Create
+- HTTP method: Post
+- Relative URI: `api/restaurants/:id/menu`
+- Save new menu to save to db
 
-# Read
-> HTTP method: Get
-> Relative URI: `api/restaurants/:id/menu`
-> Retrieve menu from db
+### Read
+- HTTP method: Get
+- Relative URI: `api/restaurants/:id/menu`
+- Retrieve menu from db
 
-# Update
-> HTTP method: Put
-> Relative URI: `api/restaurants/:id/menu`
-> Edit menu in db
+### Update
+- HTTP method: Put
+- Relative URI: `api/restaurants/:id/menu`
+- Edit menu in db
 
-# Delete
-> HTTP method: Delete
-> Relative URI: `api/restaurants/:id/menu`
-> Remove menu from db
+### Delete
+- HTTP method: Delete
+- Relative URI: `api/restaurants/:id/menu`
+- Remove menu from db
 
 ### Installing Dependencies
 
