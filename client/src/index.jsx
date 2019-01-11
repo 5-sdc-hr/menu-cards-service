@@ -31,7 +31,7 @@ class App extends React.Component {
   getMenu(id) {
     $.ajax({
       type: 'GET',
-      url: `http://localhost:3001/api/restaurants/${id}/menu`,
+      url: `http://localhost:3003/api/restaurants/${id}/menu`,
       success: this.storeMenu
     })
   }
