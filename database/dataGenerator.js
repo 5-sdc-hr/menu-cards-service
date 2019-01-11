@@ -62,7 +62,6 @@ const generateData = () => {
     for (let j = 0; j < random(2); j++) {
       addOns.push({
         name: addOnName[random(2)],
-        // name: faker.lorem.word(),
         price: faker.commerce.price(),
       })
     }
@@ -71,7 +70,6 @@ const generateData = () => {
     for (let k = 0; k < random(6); k++) {
       items.push({
         name: itemName[random(4)],
-        // name: faker.lorem.word(),
         description: faker.lorem.sentence(),
         price: faker.commerce.price(),
         addOns: addOns,
@@ -82,7 +80,6 @@ const generateData = () => {
     for (let l = 0; l < random(5); l++) {
       sections.push({
         name: categName[random(4)],
-        // name: faker.lorem.word(),
         description: faker.lorem.sentence(),
         items: items,
       })
@@ -92,7 +89,6 @@ const generateData = () => {
     for (let m = 0; m < random(5); m++) {
       cards.push({
         name: cardName[random(3)],
-        // name: faker.lorem.word(),
         footnote: faker.lorem.words(),
         sections: sections,
       })
