@@ -1,5 +1,6 @@
 const faker = require('faker');
 const fs = require('fs');
+const path = require('path');
 
 const random = (max) => {
   return Math.ceil(Math.random() * Math.floor(max));
@@ -10,15 +11,53 @@ const categName = ['Bites', 'Appetizers', 'Entree', 'Dessert'];
 const itemName = ['King Burger', 'Greens Salad', 'Lasagna', 'A5 Steak Tartar'];
 const addOnName = ['Applewood Smoked Bacon', 'Avocado'];
 
-let records = 100000;
+let records = 10000000;
 
-let writeStream = fs.createWriteStream(__dirname + '/sdcData.csv');
+let writeStream = fs.createWriteStream(path.join(__dirname + '/sdcData.csv'), { flags: 'w' });
+
+const progressLog = (index) => {
+  if (index === 1) {
+    console.log('STARTING WRITING!');
+  }
+  if (index === Math.floor(1 * records / 10)) {
+    console.log('-- 10% complete');
+  }
+  if (index === Math.floor(2 * records / 10)) {
+    console.log('---- 20% complete');
+  }
+  if (index === Math.floor(3 * records / 10)) {
+    console.log('------ 30% complete');
+  }
+  if (index === Math.floor(4 * records / 10)) {
+    console.log('-------- 40% complete');
+  }
+  if (index === Math.floor(5 * records / 10)) {
+    console.log('---------- 50% complete');
+  }
+  if (index === Math.floor(6 * records / 10)) {
+    console.log('------------ 60% complete');
+  }
+  if (index === Math.floor(7 * records / 10)) {
+    console.log('-------------- 70% complete');
+  }
+  if (index === Math.floor(8 * records / 10)) {
+    console.log('---------------- 80% complete');
+  }
+  if (index === Math.floor(9 * records / 10)) {
+    console.log('------------------ 90% complete');
+  }
+  if (index === records) {
+    console.log('-------------------- SUCCESSFULLY WRITTEN');
+  }
+ };
+
+ let i = 0;
 
 const generateData = () => {
-  let i = 0;
   let proceed = true;
   
   while (i < records && proceed) {
+    progressLog(i);
     let addOns = []; 
     for (let j = 0; j < random(2); j++) {
       addOns.push({
@@ -59,7 +98,7 @@ const generateData = () => {
       _id: i, 
       cards: cards,
     }
-    proceed = writeStream.write(JSON.stringify(forMenu) + '\n');
+    proceed = writeStream.write(JSON.stringify(forMenu));
     i++;
   }
   if (!proceed) {
@@ -69,49 +108,6 @@ const generateData = () => {
   }
 };
 
-
-// const generateData = () => {
-//   let proceed = true;
-
-//   for (let i = 0; i < 100000 ; i++) {
-//     forMenu.push({    
-//       _id: i,
-//       cards: [
-//         {
-//           name: cardName[random(3)],
-//           footnote: faker.lorem.sentence(),
-//           sections: [
-//             {
-//               name: categName[random(4)],
-//               description: faker.lorem.sentence(),
-//               items: [
-//                 {
-//                   name: itemName[random(4)],
-//                   description: faker.lorem.sentence(),
-//                   price: faker.commerce.price(),
-//                   addOns: [
-//                     {
-//                       name: addOnName[random(2)],
-//                       price: faker.commerce.price(),
-//                     },
-//                   ],
-//                 },
-//               ],
-//             },
-//           ],
-//         },
-//       ],
-//     });
-//   }
-//   proceed = writeStream.write(JSON.stringify(forMenu) = '\n');
-// }
-//   if (!proceed) {
-//     writeStream.on('drain', () => {
-//       generateData();
-//   });
-// };
-//   // writeStream.end();
-// };
 generateData();
 
 
