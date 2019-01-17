@@ -7,7 +7,7 @@ const path = require('path');
 const json2csv = require('json2csv').parse;
 const fields = ['id', 'cards'];
 // const optsHeaders = { fields };
-const opts = { header: false, delimiter: '|', doubleQuote: "'" };
+const opts = { header: false, delimiter: '|', doubleQuote: "' '", quote: '' };
 
 
 const random = (max) => {
@@ -19,9 +19,9 @@ const categName = ['Bites', 'Appetizers', 'Entree', 'Dessert'];
 const itemName = ['King Burger', 'Greens Salad', 'Lasagna', 'A5 Steak Tartar'];
 const addOnName = ['Applewood Smoked Bacon', 'Avocado'];
 
-let records = 10000000;
+let records = 1000;
 
-let writeStream = fs.createWriteStream(path.join(__dirname + '/sdcCassData.csv'), { flags: 'w' });
+let writeStream = fs.createWriteStream(path.join(__dirname + '/sdcPostData.csv'), { flags: 'w' });
 
 const progressLog = (index) => {
   if (index === 1) {
@@ -104,7 +104,7 @@ const generateData = () => {
     let forMenu = {
       id: i, 
       restaurant: 'restaurant' + i.toString(),
-      cards,
+      cards: cards
     };
     proceed = writeStream.write(json2csv(forMenu, opts) + '\n');
     i++;

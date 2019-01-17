@@ -40,6 +40,17 @@ const menuSchema = new mongoose.Schema({
 
 const Menu = mongoose.model('Menu', menuSchema);
 
+// for post 
+const postOne = (id, cb) => {
+  Menu.post({ _id: id }, (err, menu) => {
+    if (err) console.error(err);
+
+    console.log('Posted menu to DB: ', menu);
+    cb(menu);
+  });
+};
+
+// for retrieve
 const retrieveAll = (id, cb) => {
   Menu.find({ _id: id }, (err, menu) => {
     if (err) console.error(err);
@@ -49,6 +60,29 @@ const retrieveAll = (id, cb) => {
   });
 };
 
+// for edit
+const updateOne = (id, cb) => {
+  Menu.find({_id: id}, (err, menu) => {
+    if (err) console.error(err);
+
+    console.log('+++Edited menu from DB: ', menu);
+    cb(menu);
+  })
+}
+
+// for delete
+const deleteOne = (id, cb) => {
+  Menu.find({_id: id}, (err, menu) => {
+    if (err) console.error(err);
+
+    console.log('+++Deleting menu from DB: ', menu)
+    cb(menu);
+  })
+}
+
 module.exports = {
+  postOne,
   retrieveAll,
+  updateOne,
+  deleteOne
 };
