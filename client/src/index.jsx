@@ -35,9 +35,8 @@ class App extends React.Component {
       success: this.storeMenu
     })
   }
-  
+
   storeMenu(menu) {
-    menu = menu[0];
     let cardLinks = menu.cards.map((card, i) => {
       return {
         name: card.name,

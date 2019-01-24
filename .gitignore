@@ -24,3 +24,8 @@ coverage
 build/
 bundle.js
 
+# CSV Data for DB
+*.csv
+
+# new relic
+newrelic.js

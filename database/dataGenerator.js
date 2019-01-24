@@ -1,19 +1,12 @@
 const faker = require('faker');
-const fs = require('fs');
+const fs = require('graceful-fs');
 const path = require('path');
+const json2csv = require('json2csv').parse;
 
-const random = (max) => {
-  return Math.ceil(Math.random() * Math.floor(max));
-};
-
-const cardName = ['Sunday Brunch', 'Dinner', 'Lunch'];
-const categName = ['Bites', 'Appetizers', 'Entree', 'Dessert'];
-const itemName = ['King Burger', 'Greens Salad', 'Lasagna', 'A5 Steak Tartar'];
-const addOnName = ['Applewood Smoked Bacon', 'Avocado'];
-
-let records = 10000000;
-
-let writeStream = fs.createWriteStream(path.join(__dirname + '/sdcData.csv'), { flags: 'w' });
+// Helpers
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 const progressLog = (index) => {
   if (index === 1) {
@@ -51,7 +44,20 @@ const progressLog = (index) => {
   }
  };
 
- let i = 0;
+let i = 0;
+let records = 10000000;
+
+// for CSV   
+const fields = ['id', 'restaurant', 'cards'];
+const opts = { fields, header: false, delimiter: '|', quote: '' };
+
+let writeStream = fs.createWriteStream(path.join(__dirname + '/sdcData.csv'), { flags: 'w' });
+
+const cardName = ['Sunday Brunch', 'Dinner', 'Lunch'];
+const categName = ['Bites', 'Appetizers', 'Entree', 'Dessert'];
+const itemName = ['King Burger', 'Greens Salad', 'Lasagna', 'A5 Steak Tartar'];
+const addOnName = ['Applewood Smoked Bacon', 'Avocado'];
+
 
 const generateData = () => {
   let proceed = true;
@@ -59,46 +65,45 @@ const generateData = () => {
   while (i < records && proceed) {
     progressLog(i);
     let addOns = []; 
-    for (let j = 0; j < random(2); j++) {
+    for (let j = 0; j < random(1, 2); j++) {
       addOns.push({
-        name: addOnName[random(2)],
+        name: addOnName[random(0, 2)],
         price: faker.commerce.price(),
-      })
+      });
     }
-    
     let items = [];
-    for (let k = 0; k < random(6); k++) {
+    for (let k = 0; k < random(1, 4); k++) {
       items.push({
-        name: itemName[random(4)],
+        name: itemName[random(0, 4)],
         description: faker.lorem.sentence(),
         price: faker.commerce.price(),
-        addOns: addOns,
-      })
+        addOns,
+      });
     }
       
     let sections = [];
-    for (let l = 0; l < random(5); l++) {
+    for (let l = 0; l < random(1, 2); l++) {
       sections.push({
-        name: categName[random(4)],
+        name: categName[random(0, 4)],
         description: faker.lorem.sentence(),
-        items: items,
-      })
+        items,
+      });
     }
-      
     let cards = [];
-    for (let m = 0; m < random(5); m++) {
+    for (let m = 0; m < random(1, 2); m++) {
       cards.push({
-        name: cardName[random(3)],
+        name: cardName[random(0, 3)],
         footnote: faker.lorem.words(),
-        sections: sections,
-      })
+        sections,
+      });
     }
-      
     let forMenu = {
-      _id: i, 
-      cards: cards,
-    }
-    proceed = writeStream.write(JSON.stringify(forMenu));
+      id: i,
+      restaurant: 'restaurant' + i.toString(),
+      cards,
+    };
+    proceed = writeStream.write(json2csv(forMenu, opts) + '\n');
+    // proceed = writeStream.write(JSON.stringify(forMenu) + '\n');
     i++;
   }
   if (!proceed) {
@@ -109,6 +114,3 @@ const generateData = () => {
 };
 
 generateData();
-
-
-// module.exports = { forMenu }

@@ -17,13 +17,18 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cassandra-driver": "^4.0.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "faker": "^4.1.0",
+    "graceful-fs": "^4.1.15",
     "jquery": "^3.3.1",
+    "json2csv": "^4.3.3",
     "mongoose": "^5.4.0",
     "morgan": "^1.9.1",
+    "newrelic": "^5.1.0",
     "path": "^0.12.7",
+    "pg": "^7.8.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "url-parse": "^1.4.4"
